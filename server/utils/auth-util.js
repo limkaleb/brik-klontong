@@ -14,11 +14,9 @@ export const bcryptCompare = async (plainPassword, hash) =>
 //   config.PASSWORD_REGEX.test(password);
 
 export const generateToken = (res, userId) => {
-  console.log('useridd: ', userId);
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
-  console.log('tokenn: ', token);
 
   res.cookie('jwt', token, {
     httpOnly: true,
@@ -26,5 +24,4 @@ export const generateToken = (res, userId) => {
     sameSite: 'strict', // Prevent CSRF attacks
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
   });
-  console.log('tokenn 22: ', token);
 };

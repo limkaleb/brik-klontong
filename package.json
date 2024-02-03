@@ -2,11 +2,12 @@
   "name": "brik",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
+  "description": "Simple Klontong",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js",
+    "server": "nodemon server/index.js",
+    "dev": "npm run server"
   },
   "keywords": [],
   "author": "",
