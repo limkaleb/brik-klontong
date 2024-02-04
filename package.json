@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server/index.js",
     "server": "nodemon server/index.js",
-    "dev": "npm run server"
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "nodemon": "^3.0.3"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-node": "^4.1.0",

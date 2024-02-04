@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { PrismaClient } from '@prisma/client';
 import { bcryptCompare, encrypt, generateToken } from '../utils/auth-util.js';
+
 const { User } = new PrismaClient();
 
 // @desc    Auth user & get token
@@ -24,8 +25,9 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
     });
   } else {
-    res.status(401);
-    throw new Error('Invalid email or password');
+    res.status(401).json({
+      message: 'Invalid email or password',
+    });
   }
 });
 
@@ -35,7 +37,6 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   console.log('test create: ', req.body);
-
   const userExists = await User.findUnique({
     where: {
       email,
@@ -64,8 +65,9 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
     });
   } else {
-    res.status(400);
-    throw new Error('Invalid user data');
+    res.status(400).json({
+      message: 'Invalid user data',
+    });
   }
 });
 
@@ -97,8 +99,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
     });
   } else {
-    res.status(404);
-    throw new Error('User not found');
+    res.status(404).json({
+      message: 'User not found',
+    });
   }
 });
 
