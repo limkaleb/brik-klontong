@@ -18,3 +18,26 @@ model User {
   createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
   updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz
 }
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String?
+  products  Product[]
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String?
+  description String?
+  price       Int
+  image       String?
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int      @map("category_id")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@unique([categoryId, name])
+  @@index([categoryId])
+}
